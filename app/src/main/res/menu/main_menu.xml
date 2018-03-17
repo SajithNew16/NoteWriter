@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--add new note-->
+    <item
+        android:id="@+id/action_new_note"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="0"
+        android:title="create"
+        app:showAsAction="always" />
+
+
+</menu>

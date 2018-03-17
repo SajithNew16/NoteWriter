@@ -6,14 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.notewriter.sd.notewriter.MainActivity">
 
-
-    <listView
-        android:id="@+id/listView"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints"></listView>
+        android:layout_height="match_parent"
+        android:id="@+id/listView">
+    </ListView>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -34,9 +34,14 @@ public class NoteActivity extends AppCompatActivity {
                 titleTextField = (EditText) findViewById(R.id.et_title);
                 contentTextField = (EditText) findViewById(R.id.et_content);
 
-                helper.save(titleTextField.getText().toString(),contentTextField.getText().toString());
+                helper.save(titleTextField.getText().toString(), contentTextField.getText().toString());
 
-                Toast.makeText(this,"Your Note Is Saved!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
+                finish();
+
+                break;
+
+            case R.id.action_cancel_new_note:
                 finish();
 
                 break;

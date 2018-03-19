@@ -11,5 +11,14 @@
         android:title="save"
         app:showAsAction="always" />
 
+    <!--cancel new note-->
+    <item
+        android:id="@+id/action_cancel_new_note"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:orderInCategory="0"
+        android:title="cancel"
+        app:showAsAction="always" />
+
 
 </menu>

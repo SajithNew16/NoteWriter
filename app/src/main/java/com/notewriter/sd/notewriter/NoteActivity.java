@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 public class NoteActivity extends AppCompatActivity {
 
-    EditText titleTextField;
-    EditText contentTextField;
+    private EditText titleTextField;
+    private EditText contentTextField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,14 @@ public class NoteActivity extends AppCompatActivity {
                 titleTextField = (EditText) findViewById(R.id.et_title);
                 contentTextField = (EditText) findViewById(R.id.et_content);
 
-                helper.save(titleTextField.getText().toString(), contentTextField.getText().toString());
+                if (titleTextField.getText().toString().matches("") && contentTextField.getText().toString().matches("")) {
+                    finish();
+                } else {
+                    helper.save(titleTextField.getText().toString(), contentTextField.getText().toString());
+                    Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
-                Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
-                finish();
 
                 break;
 

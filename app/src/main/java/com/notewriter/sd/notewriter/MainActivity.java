@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listViewNotes = (ListView) findViewById(R.id.note_listView);
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent newNoteIntent = new Intent(MainActivity.this, NoteActivity.class);
                 MainActivity.this.startActivity(newNoteIntent);
                 break;
-
         }
 
         return true;

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">NoteWriter</string>
+    <string name="app_name">Note Writer</string>
+    <string name="save">save</string>
 </resources>

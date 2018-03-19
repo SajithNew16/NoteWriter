@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +19,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listViewNotes = (ListView) findViewById(R.id.note_listView);
+        listViewNotes = findViewById(R.id.note_listView);
+
+        NoteDBHelper helper = new NoteDBHelper(this);
+
+        List<Note> rawData = helper.readAll();
+        List<String> noteData = new ArrayList<>();
+        for(Note d: rawData){
+            noteData.add(d.getTitle());
+            //noteData.add(d.getContent());
+        }
+
+//        ArrayAdapter<String> simpleAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,noteData);
+
+        ListView lv = findViewById(R.id.note_listView);
+        lv.setAdapter(new NoteListAdapter(getApplicationContext(),rawData));
+
     }
 
     @Override

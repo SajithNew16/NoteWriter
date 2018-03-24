@@ -12,13 +12,14 @@ import java.util.TimeZone;
 public class Note {
 
     public int id;
-    private long nDateTime;
+    //private long nDateTime;
     private String Title;
     private String content;
 
 
-    public Note(long nDateTime, String Title, String content) {
-        this.setnDateTime(nDateTime);
+    public Note(int id, String Title, String content) {
+        this.setId(id);
+        //this.setnDateTime(nDateTime);
         this.setTitle(Title);
         this.setContent(content);
     }
@@ -30,7 +31,7 @@ public class Note {
     public void setId(int id) {
         this.id = id;
     }
-
+/*
     public long getnDateTime() {
         return nDateTime;
     }
@@ -38,7 +39,7 @@ public class Note {
     public void setnDateTime(long nDateTime) {
         this.nDateTime = nDateTime;
     }
-
+*/
     public String getTitle() {
         return Title;
     }

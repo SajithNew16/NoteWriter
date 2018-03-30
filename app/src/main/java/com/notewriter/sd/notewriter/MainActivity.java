@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        List<Note> noteData = helper.readAll();
+        final List<Note> noteData = helper.readAll();
 
         ListView noteList = findViewById(R.id.note_listView);
         noteList.setAdapter(new NoteListAdapter(getApplicationContext(),noteData));
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent NoteSelectIntent = new Intent(MainActivity.this,NoteActivity.class);
-                NoteSelectIntent.putExtra("Title",position);
+                NoteSelectIntent.putExtra("noteData",noteData.get(position).getId());
+               // NoteSelectIntent.putExtra("content",noteData.get(position).getId());
                 MainActivity.this.startActivity(NoteSelectIntent);
             }
         });

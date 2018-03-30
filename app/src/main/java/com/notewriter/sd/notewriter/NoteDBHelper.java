@@ -48,7 +48,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
 
     public List<Note> readAll(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT * FROM note_table",null);
+        Cursor cur = db.rawQuery("SELECT * FROM note_table ORDER BY id DESC",null);
         cur.moveToNext();
         int idIdx = cur.getColumnIndex("id");
         int titleIdx = cur.getColumnIndex("title");

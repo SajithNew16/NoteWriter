@@ -1,10 +1,5 @@
 package com.notewriter.sd.notewriter;
 
-import android.content.Context;
-import android.icu.text.SimpleDateFormat;
-
-import java.util.TimeZone;
-
 /**
  * Created by Dasuni Anupama on 3/15/2018.
  */
@@ -12,15 +7,13 @@ import java.util.TimeZone;
 public class Note {
 
     public int id;
-    //private long nDateTime;
-    private String Title;
+    private String title;
     private String content;
 
 
-    public Note(int id, String Title, String content) {
+    public Note(int id, String title, String content) {
         this.setId(id);
-        //this.setnDateTime(nDateTime);
-        this.setTitle(Title);
+        this.setTitle(title);
         this.setContent(content);
     }
 
@@ -31,21 +24,13 @@ public class Note {
     public void setId(int id) {
         this.id = id;
     }
-/*
-    public long getnDateTime() {
-        return nDateTime;
-    }
 
-    public void setnDateTime(long nDateTime) {
-        this.nDateTime = nDateTime;
-    }
-*/
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        title = title;
     }
 
     public String getContent() {
@@ -56,10 +41,4 @@ public class Note {
         this.content = content;
     }
 
-   /* public String DateTimeFormat(Context context){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYY HH:mm:ss"
-        , context.getResources().getConfiguration().locale);
-        dateFormat.setTimeZone(TimeZone.getDefault());
-    }
-    */
 }

@@ -7,17 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewNotes;
-    public  NoteDBHelper helper;
+    public NoteDBHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +51,14 @@ public class MainActivity extends AppCompatActivity {
         final List<Note> noteData = helper.readAll();
 
         ListView noteList = findViewById(R.id.note_listView);
-        noteList.setAdapter(new NoteListAdapter(getApplicationContext(),noteData));
+        noteList.setAdapter(new NoteListAdapter(getApplicationContext(), noteData));
 
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent NoteSelectIntent = new Intent(MainActivity.this,NoteActivity.class);
-                NoteSelectIntent.putExtra("noteData",noteData.get(position).getId());
-               // NoteSelectIntent.putExtra("content",noteData.get(position).getId());
-                MainActivity.this.startActivity(NoteSelectIntent);
+                Intent noteSelectIntent = new Intent(MainActivity.this, NoteActivity.class);
+                noteSelectIntent.putExtra("noteId", noteData.get(position).getId());
+                MainActivity.this.startActivity(noteSelectIntent);
             }
         });
     }

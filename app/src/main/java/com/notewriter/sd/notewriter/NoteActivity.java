@@ -6,25 +6,31 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
 
     private EditText titleTextField;
     private EditText contentTextField;
+    private NoteDBHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-        
+
+        helper = new NoteDBHelper(this);
+        try {
+            int id = getIntent().getExtras().getInt("noteId");
+            List<Note> noteId = helper.read(id);
+            Toast.makeText(this, noteId.get(0).getContent(), Toast.LENGTH_SHORT).show();
+
+        } catch (NullPointerException e) {
+
+        }
+
     }
 
     @Override

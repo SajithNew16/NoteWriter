@@ -39,26 +39,33 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         db.insert("note_table", null, cv);
         db.close();
     }
-    public String read(int id){
+
+    public List<Note> read(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT value FROM note_table WHERE id=" +id,null);
+        Cursor cur = db.rawQuery("SELECT title,content FROM note_table WHERE id=" + id, null);
         cur.moveToNext();
-        return cur.getString(cur.getColumnIndex("value"));
+        int titleIdx = cur.getColumnIndex("title");
+        int contentIdx = cur.getColumnIndex("content");
+        List<Note> note = new ArrayList<>();
+        String title = cur.getString(titleIdx);
+        String content = cur.getString(contentIdx);
+        note.add(new Note(id, title, content));
+        return note;
     }
 
-    public List<Note> readAll(){
+    public List<Note> readAll() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT * FROM note_table ORDER BY id DESC",null);
+        Cursor cur = db.rawQuery("SELECT * FROM note_table ORDER BY id DESC", null);
         cur.moveToNext();
         int idIdx = cur.getColumnIndex("id");
         int titleIdx = cur.getColumnIndex("title");
         int contentIdx = cur.getColumnIndex("content");
         List<Note> note = new ArrayList<>();
-        while(!cur.isAfterLast()){
+        while (!cur.isAfterLast()) {
             Integer id = cur.getInt(idIdx);
             String title = cur.getString(titleIdx);
             String content = cur.getString(contentIdx);
-            note.add(new Note(id,title,content));
+            note.add(new Note(id, title, content));
             cur.moveToNext();
 
         }

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
@@ -25,7 +26,10 @@ public class NoteActivity extends AppCompatActivity {
         try {
             int id = getIntent().getExtras().getInt("noteId");
             List<Note> noteId = helper.read(id);
-            Toast.makeText(this, noteId.get(0).getContent(), Toast.LENGTH_SHORT).show();
+            titleTextField = findViewById(R.id.et_title);
+            titleTextField.setText(noteId.get(0).getTitle());
+            contentTextField = findViewById(R.id.et_content);
+            contentTextField.setText(noteId.get(0).getContent());
 
         } catch (NullPointerException e) {
 

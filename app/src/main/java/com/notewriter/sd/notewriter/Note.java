@@ -30,7 +30,7 @@ public class Note {
     }
 
     public void setTitle(String title) {
-        title = title;
+        this.title = title;
     }
 
     public String getContent() {

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Note Writer</string>
     <string name="save">save</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="add_note">Add note</string>
+
 </resources>

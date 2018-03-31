@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Title"
+        android:hint="@string/enter_title"
         android:singleLine="true" />
 
     <EditText
@@ -21,6 +21,6 @@
         android:layout_height="match_parent"
         android:ems="10"
         android:gravity="top"
-        android:hint="Add note"
+        android:hint="@string/add_note"
         android:inputType="textMultiLine" />
 </LinearLayout>

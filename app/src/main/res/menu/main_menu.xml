@@ -8,7 +8,7 @@
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="0"
-        android:title="create"
+        android:title="@string/create"
         app:showAsAction="always" />
 
 </menu>

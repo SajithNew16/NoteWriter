@@ -45,11 +45,9 @@ public class NoteListAdapter extends BaseAdapter {
         if (listItem == null) {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.list_item, null);
         }
-
         Note note = noteList.get(position);
         TextView text_title = listItem.findViewById(R.id.text_title);
         TextView text_note = listItem.findViewById(R.id.text_note);
-
         text_title.setText(note.getTitle());
         text_note.setText(note.getContent());
 

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,16 +20,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         listViewNotes = findViewById(R.id.note_listView);
-
         helper = new NoteDBHelper(this);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
         return true;
     }
 
@@ -42,17 +41,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         final List<Note> noteData = helper.readAll();
-
         ListView noteList = findViewById(R.id.note_listView);
         noteList.setAdapter(new NoteListAdapter(getApplicationContext(), noteData));
-
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

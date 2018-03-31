@@ -21,7 +21,6 @@ public class NoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-
         helper = new NoteDBHelper(this);
         try {
             int id = getIntent().getExtras().getInt("noteId");
@@ -48,12 +47,9 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         titleTextField = (EditText) findViewById(R.id.et_title);
         contentTextField = (EditText) findViewById(R.id.et_content);
-
         switch (item.getItemId()) {
             case R.id.action_save_new_note:
                 NoteDBHelper helper = new NoteDBHelper(this);
-
-
                 if (titleTextField.getText().toString().matches("") && contentTextField.getText().toString().matches("")) {
                     Toast.makeText(this, "No New Note to be Saved!", Toast.LENGTH_SHORT).show();
                     finish();
@@ -62,14 +58,10 @@ public class NoteActivity extends AppCompatActivity {
                     Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
                 break;
-
             case R.id.action_cancel_new_note:
-
                 if (titleTextField.getText().toString().matches("") && contentTextField.getText().toString().matches("")) {
                     finish();
-
                 } else {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                         @Override
@@ -81,24 +73,16 @@ public class NoteActivity extends AppCompatActivity {
                                     break;
                                 case DialogInterface.BUTTON_NEGATIVE:
                                     //no button clicked
-
                                     break;
-
                             }
-
                         }
                     };
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
                     builder.setTitle("Really Discarding changes!").setCancelable(false).setMessage("Are you sure you want to discard the changes?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
-
-
                 }
-
-
                 break;
-
         }
+
         return true;
     }
 
@@ -114,16 +98,11 @@ public class NoteActivity extends AppCompatActivity {
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
                         //no button clicked
-
                         break;
-
                 }
-
             }
         };
-
         AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
         builder.setTitle("Really go back!").setMessage("Are you sure you want to go back?").setCancelable(false).setPositiveButton("Yes", dialogClickListener1).setNegativeButton("No", dialogClickListener1).show();
-
     }
 }

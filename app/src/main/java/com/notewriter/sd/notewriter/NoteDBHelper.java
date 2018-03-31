@@ -16,6 +16,10 @@ import java.util.List;
 public class NoteDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "notedatabase.db";
+    private static final String CREATE = "CREATE TABLE note_table(id integer PRIMARY KEY,title text,content text)";
+    private static final String READ_BY = "SELECT title,content FROM note_table WHERE id=";
+    private static final String READ_ALL = "SELECT * FROM note_table ORDER BY id DESC";
+
 
     public NoteDBHelper(Context context) {
         super(context.getApplicationContext(), DB_NAME, null, 1);
@@ -23,7 +27,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE note_table(id integer PRIMARY KEY,title text, content text)");
+        db.execSQL(CREATE);
     }
 
     @Override
@@ -42,7 +46,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
 
     public List<Note> read(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT title,content FROM note_table WHERE id=" + id, null);
+        Cursor cur = db.rawQuery(READ_BY + id, null);
         cur.moveToNext();
         int titleIdx = cur.getColumnIndex("title");
         int contentIdx = cur.getColumnIndex("content");
@@ -50,12 +54,13 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         String title = cur.getString(titleIdx);
         String content = cur.getString(contentIdx);
         note.add(new Note(id, title, content));
+
         return note;
     }
 
     public List<Note> readAll() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT * FROM note_table ORDER BY id DESC", null);
+        Cursor cur = db.rawQuery(READ_ALL, null);
         cur.moveToNext();
         int idIdx = cur.getColumnIndex("id");
         int titleIdx = cur.getColumnIndex("title");
@@ -69,7 +74,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
             cur.moveToNext();
 
         }
-        return note;
 
+        return note;
     }
 }

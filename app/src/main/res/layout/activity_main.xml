@@ -11,5 +11,5 @@
         android:id="@+id/note_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"></ListView>
+        android:layout_marginStart="10dp"/>
 </LinearLayout>

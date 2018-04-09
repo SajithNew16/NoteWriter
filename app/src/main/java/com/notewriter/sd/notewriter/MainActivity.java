@@ -1,12 +1,17 @@
 package com.notewriter.sd.notewriter;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import java.util.List;
@@ -15,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listViewNotes;
     public NoteDBHelper helper;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_new_note:
                 Intent newNoteIntent = new Intent(MainActivity.this, NoteActivity.class);
+                newNoteIntent.putExtra("mode", "Save");
                 MainActivity.this.startActivity(newNoteIntent);
                 break;
         }
@@ -46,17 +53,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final List<Note> noteData = helper.readAll();
-        ListView noteList = findViewById(R.id.note_listView);
-        noteList.setAdapter(new NoteListAdapter(getApplicationContext(), noteData));
-        noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent noteSelectIntent = new Intent(MainActivity.this, NoteActivity.class);
-                noteSelectIntent.putExtra("noteId", noteData.get(position).getId());
-                MainActivity.this.startActivity(noteSelectIntent);
-            }
-        });
+        refreshList();
     }
+
+    public void refreshList() {
+        final List<Note> noteData = helper.readAll();
+        final ListView noteList = findViewById(R.id.note_listView);
+        noteList.setAdapter(new NoteListAdapter(context, noteData, helper));
+    }
+
 }
 

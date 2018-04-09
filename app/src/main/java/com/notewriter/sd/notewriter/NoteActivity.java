@@ -16,22 +16,27 @@ public class NoteActivity extends AppCompatActivity {
     private EditText titleTextField;
     private EditText contentTextField;
     private NoteDBHelper helper;
+    String mode;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
         helper = new NoteDBHelper(this);
-        try {
-            int id = getIntent().getExtras().getInt("noteId");
-            List<Note> noteId = helper.read(id);
-            titleTextField = findViewById(R.id.et_title);
-            titleTextField.setText(noteId.get(0).getTitle());
-            contentTextField = findViewById(R.id.et_content);
-            contentTextField.setText(noteId.get(0).getContent());
+        mode = getIntent().getExtras().getString("mode");
+        if (mode.equals("Update")) {
+            try {
+                id = getIntent().getExtras().getInt("noteId");
+                List<Note> noteId = helper.read(id);
+                titleTextField = findViewById(R.id.et_title);
+                titleTextField.setText(noteId.get(0).getTitle());
+                contentTextField = findViewById(R.id.et_content);
+                contentTextField.setText(noteId.get(0).getContent());
 
-        } catch (NullPointerException e) {
+            } catch (NullPointerException e) {
 
+            }
         }
 
     }
@@ -54,9 +59,15 @@ public class NoteActivity extends AppCompatActivity {
                     Toast.makeText(this, "No New Note to be Saved!", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    helper.save(titleTextField.getText().toString(), contentTextField.getText().toString());
-                    Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    if (mode.equals("Save")) {
+                        helper.save(titleTextField.getText().toString(), contentTextField.getText().toString());
+                        Toast.makeText(this, "Your Note Is Saved!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        helper.update(id, titleTextField.getText().toString(), contentTextField.getText().toString());
+                        Toast.makeText(this, "Your Note Is Updated!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
                 break;
             case R.id.action_cancel_new_note:

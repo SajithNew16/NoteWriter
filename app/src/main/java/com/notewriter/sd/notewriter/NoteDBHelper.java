@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,5 +77,19 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         }
 
         return note;
+    }
+
+    public Boolean update(int id, String title, String content) {
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        cv.put("title", title);
+        cv.put("content", content);
+        db.update("note_table", cv, "id = ?", new String[]{String.valueOf(id)});
+        return true;
+    }
+
+    public int delete(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("note_table", "id = ?", new String[]{String.valueOf(id)});
     }
 }
